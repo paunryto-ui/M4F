@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Zap</title>
+<title>CMS</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -18,8 +18,8 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:rgba(134,150,160,.15);border-radius:3px}
 
 /* ── SCREENS ── */
-.scr{display:none;position:fixed;inset:0;flex-direction:column;background:var(--bg)}
-.scr.on{display:flex}
+.scr{display:flex;position:fixed;inset:0;flex-direction:column;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .2s ease}
+.scr.on{opacity:1;pointer-events:all}
 #s-app{display:none;position:fixed;inset:0;flex-direction:column;background:var(--bg)}
 #s-app.on{display:flex}
 
@@ -141,8 +141,8 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
 .fab svg{width:26px;height:26px;fill:#fff}
 
 /* ── NEW CHAT SLIDE ── */
-.slide{position:fixed;inset:0;background:var(--bg);z-index:50;display:none;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
-.slide.on{display:flex;transform:translateX(0)}
+.slide{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.slide.on{transform:translateX(0);pointer-events:all}
 .slide-hdr{display:flex;align-items:center;padding:12px 4px 12px 4px;gap:4px;background:var(--panel);flex-shrink:0}
 .back-btn{width:40px;height:40px;border-radius:50%;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .back-btn svg{width:22px;height:22px;fill:var(--txt)}
@@ -206,8 +206,8 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
 .gpc-check.on::after{content:'✓';font-size:12px;color:#fff;font-weight:700}
 
 /* ── CHAT VIEW ── */
-.chat-view{position:fixed;inset:0;background:var(--bg);z-index:40;display:none;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1)}
-.chat-view.on{display:flex;transform:translateX(0)}
+.chat-view{position:fixed;inset:0;background:var(--bg);z-index:40;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .28s cubic-bezier(.22,.61,.36,1);pointer-events:none}
+.chat-view.on{transform:translateX(0);pointer-events:all}
 .ch-hdr{display:flex;align-items:center;padding:8px 6px;background:var(--panel);flex-shrink:0;gap:6px;border-bottom:1px solid var(--bdr)}
 .ch-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;cursor:pointer;flex-shrink:0;overflow:hidden}
 .ch-av img{width:100%;height:100%;object-fit:cover}
@@ -378,6 +378,7 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
 .cbtn.accept{background:var(--g)}.cbtn.accept svg{fill:#fff}
 .cbtn.mute,.cbtn.spk{background:#2a3942}.cbtn.mute svg,.cbtn.spk svg{fill:var(--icon)}
 .cbtn.muted{background:var(--g)}.cbtn.muted svg{fill:#fff}
+.cbtn.cam{background:#2a3942}.cbtn.cam svg{fill:var(--icon)}
 
 /* notifs */
 .nwrap{position:fixed;top:10px;right:10px;z-index:9998;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:340px;width:calc(100vw - 20px)}
@@ -447,10 +448,10 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
     <div class="logo-wrap">
       <svg viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="22" fill="#00a884"/><path d="M44 12L22 44H38L34 68L62 34H46L50 12H44Z" fill="white"/></svg>
     </div>
-    <div class="s-title" id="sNumTitle">Zap</div>
+    <div class="s-title" id="sNumTitle">CMS</div>
     <div class="s-sub" id="sNumSub">Nomor kamu dibuat otomatis. Pilih negaramu di bawah.</div>
     <div class="num-card">
-      <div class="nc-lbl" id="sNumLbl">NOMOR ZAP KAMU</div>
+      <div class="nc-lbl" id="sNumLbl">NOMOR CMS KAMU</div>
       <div class="nc-num" id="ncNum">+62 812 3456 7890</div>
       <div class="nc-badge" id="sNumBadge">Otomatis · Unik</div>
     </div>
@@ -480,7 +481,7 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
 </div>
 
 <!-- ══ SETUP: STATUS ══ -->
-<div id="s-stat" class="scr">
+<div id="s-stat" class="scr" style="display:none">
   <div class="setup-bar"></div>
   <div class="setup-body">
     <div class="s-title" id="sStatTitle">Atur status</div>
@@ -499,7 +500,7 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
   <!-- ─ CHATS PAGE ─ -->
   <div class="page on" id="pageChats">
     <div class="page-hdr">
-      <div class="page-title" id="appTitle">Zap</div>
+      <div class="page-title" id="appTitle">CMS</div>
       <div class="hdr-acts">
         <button class="hbtn" title="Kamera"><svg viewBox="0 0 24 24"><path d="M12 15.2c-1.77 0-3.2-1.43-3.2-3.2s1.43-3.2 3.2-3.2 3.2 1.43 3.2 3.2-1.43 3.2-3.2 3.2zM9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg></button>
         <div class="hbtn-av" id="myAvBtn" title="Profil"></div>
@@ -659,14 +660,16 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
     </div>
     <div class="nc-field">
       <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-      <select id="ncCountry" style="width:90px;margin-right:8px;color:var(--txt);background:transparent;border:none;border-bottom:1px solid var(--bdr);padding:8px 0;outline:none;font-size:14px"></select>
-      <input id="ncPhone" placeholder="Telepon" type="tel" style="flex:1">
+      <div style="flex:1;display:flex;gap:6px;align-items:flex-end">
+        <select id="ncCountry" style="width:100px;color:var(--txt);background:var(--inp);border:none;border-bottom:1px solid var(--bdr);padding:8px 4px;outline:none;font-size:13px;border-radius:4px 4px 0 0"></select>
+        <input id="ncPhone" placeholder="Nomor telepon" type="tel" style="flex:1;background:none;border:none;border-bottom:1px solid var(--bdr);color:var(--txt);font-size:16px;padding:8px 0;outline:none">
+      </div>
     </div>
     <div class="nc-field" style="margin-top:12px">
       <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
       <div style="flex:1">
         <div style="font-size:14px;color:var(--txt);margin-bottom:2px">Sinkronkan kontak ke telepon</div>
-        <div style="font-size:12px;color:var(--txt2)" id="syncEmail">paundrawira@gmail.com</div>
+        <div style="font-size:12px;color:var(--txt2)" id="syncEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3949584c575d4b584e504b58795e54585055175a5654">[email&#160;protected]</a></div>
       </div>
       <div style="width:44px;height:24px;background:var(--g);border-radius:12px;display:flex;align-items:center;justify-content:flex-end;padding-right:2px;cursor:pointer"><div style="width:20px;height:20px;border-radius:50%;background:#fff"></div></div>
     </div>
@@ -799,15 +802,319 @@ input,textarea,button,select{font-family:inherit;-webkit-tap-highlight-color:tra
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js">
+// ══════════════════════════════════════════════
+//  WEBRTC REAL VIDEO / VOICE CALLS
+// ══════════════════════════════════════════════
+
+let localStream = null;
+let peerConn = null;
+const RTC_CONFIG = { iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}] };
+
+async function initWebRTC(ct, dir, peerNum){
+  try {
+    const constraints = ct==='video'
+      ? {video:{facingMode:'user',width:{ideal:1280},height:{ideal:720}}, audio:true}
+      : {audio:true, video:false};
+    localStream = await navigator.mediaDevices.getUserMedia(constraints);
+    // Show local video preview in call card if video
+    if(ct==='video'){
+      const lv=$('localVideo');
+      if(lv){lv.srcObject=localStream;lv.play().catch(()=>{});}
+    }
+    // Create peer connection
+    peerConn = new RTCPeerConnection(RTC_CONFIG);
+    localStream.getTracks().forEach(t=>peerConn.addTrack(t,localStream));
+    // Remote stream
+    peerConn.ontrack = ev=>{
+      const rv=$('remoteVideo')||$('remoteAudio');
+      if(rv&&ev.streams[0]){rv.srcObject=ev.streams[0];rv.play().catch(()=>{});}
+    };
+    // ICE candidates via BC
+    peerConn.onicecandidate = ev=>{
+      if(ev.candidate) BC.postMessage({type:'rtc_ice',from:ME.number,to:peerNum,candidate:ev.candidate});
+    };
+    if(dir==='out'){
+      // Caller creates offer
+      const offer = await peerConn.createOffer();
+      await peerConn.setLocalDescription(offer);
+      BC.postMessage({type:'rtc_offer',from:ME.number,to:peerNum,sdp:offer});
+    }
+  } catch(err){
+    console.warn('WebRTC init failed:',err.message);
+    // Gracefully continue without media
+  }
+}
+
+async function handleRTCOffer(d){
+  if(!peerConn){ peerConn=new RTCPeerConnection(RTC_CONFIG); }
+  try {
+    const ct=callState?.type||'voice';
+    const constraints=ct==='video'?{video:{facingMode:'user'},audio:true}:{audio:true,video:false};
+    if(!localStream){
+      try{localStream=await navigator.mediaDevices.getUserMedia(constraints);}catch(e){}
+    }
+    if(localStream){
+      localStream.getTracks().forEach(t=>peerConn.addTrack(t,localStream));
+      if(ct==='video'){const lv=$('localVideo');if(lv){lv.srcObject=localStream;lv.play().catch(()=>{});}}
+    }
+    peerConn.ontrack=ev=>{const rv=$('remoteVideo')||$('remoteAudio');if(rv&&ev.streams[0]){rv.srcObject=ev.streams[0];rv.play().catch(()=>{});}};
+    peerConn.onicecandidate=ev=>{if(ev.candidate)BC.postMessage({type:'rtc_ice',from:ME.number,to:d.from,candidate:ev.candidate});};
+    await peerConn.setRemoteDescription(new RTCSessionDescription(d.sdp));
+    const answer=await peerConn.createAnswer();
+    await peerConn.setLocalDescription(answer);
+    BC.postMessage({type:'rtc_answer',from:ME.number,to:d.from,sdp:answer});
+  } catch(e){ console.warn('handleOffer err',e); }
+}
+
+function stopWebRTC(){
+  if(localStream){localStream.getTracks().forEach(t=>t.stop());localStream=null;}
+  if(peerConn){peerConn.close();peerConn=null;}
+}
+
+// Inject RTC message handling into BC listener
+const _origBCListener = BC.onmessage;
+BC.addEventListener('message', ev=>{
+  const d=ev.data;
+  if(!ME.number||d.from===ME.number)return;
+  if(d.type==='rtc_offer'&&d.to===ME.number) handleRTCOffer(d);
+  if(d.type==='rtc_answer'&&d.to===ME.number&&peerConn){
+    try{peerConn.setRemoteDescription(new RTCSessionDescription(d.sdp));}catch(e){}
+  }
+  if(d.type==='rtc_ice'&&d.to===ME.number&&peerConn){
+    try{peerConn.addIceCandidate(new RTCIceCandidate(d.candidate));}catch(e){}
+  }
+});
+
+// ── Override showOutCall / showIncomingCall to include video elements ──
+const _origShowOutCall = showOutCall;
+function showOutCall(c,ct){
+  const videoHtml = ct==='video'?`
+    <div style="position:relative;width:100%;height:180px;background:#000;border-radius:12px;margin-bottom:12px;overflow:hidden">
+      <video id="remoteVideo" autoplay playsinline style="width:100%;height:100%;object-fit:cover;background:#111"></video>
+      <video id="localVideo" autoplay playsinline muted style="position:absolute;bottom:8px;right:8px;width:72px;height:96px;border-radius:8px;object-fit:cover;border:2px solid rgba(255,255,255,.3)"></video>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+        <div id="remoteAvFallback" style="width:88px;height:88px;border-radius:50%;background:${c.color};display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;color:#fff;animation:cpulse 2s infinite">${ini(c.name||c.number)}</div>
+      </div>
+    </div>`:
+    `<div class="call-cav" style="background:${c.color};animation:cpulse 2s infinite">${c.photo?'<img src="'+c.photo+'">':ini(c.name||c.number)}</div>`;
+
+  $('callCard').innerHTML=`
+    <div class="call-badge">${ct==='video'?'Panggilan video':'Panggilan suara'}</div>
+    ${videoHtml}
+    ${ct!=='video'?'':''}
+    <div class="call-cname">${esc(c.name||c.number)}</div>
+    <div class="call-cnum">${c.number}</div>
+    <div class="call-cstat" id="callStat">Memanggil...</div>
+    <div class="call-ctmr" id="callTmr"></div>
+    <div class="call-btns">
+      <button class="cbtn mute" id="cbMute" title="Bisukan">
+        <svg viewBox="0 0 24 24" fill="var(--icon)"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>
+      </button>
+      ${ct==='video'?`<button class="cbtn cam" id="cbCam" title="Matikan kamera" style="background:#2a3942"><svg viewBox="0 0 24 24" fill="var(--icon)"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></button>`:''}
+      <button class="cbtn end" id="cbEnd" title="Akhiri">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" transform="rotate(135 12 12)"/></svg>
+      </button>
+      <button class="cbtn spk" id="cbSpk" title="Speaker">
+        <svg viewBox="0 0 24 24" fill="var(--icon)"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      </button>
+    </div>`;
+  $('callOv').classList.add('on');
+  wireCBtns(ct);
+  if(ct==='video'){
+    const cb=$('cbCam');
+    let camOn=true;
+    if(cb)cb.onclick=()=>{
+      camOn=!camOn;
+      if(localStream){localStream.getVideoTracks().forEach(t=>t.enabled=camOn);}
+      cb.style.background=camOn?'#2a3942':'var(--g)';
+    };
+  }
+  // Wire remote video fallback: hide avatar when remote stream arrives
+  const rem=$('remoteVideo');
+  if(rem){rem.addEventListener('playing',()=>{const f=$('remoteAvFallback');if(f)f.style.display='none';});}
+  // Audio element for voice call
+  if(ct!=='video'){
+    const au=document.createElement('audio');au.id='remoteAudio';au.autoplay=true;au.style.display='none';$('callCard').appendChild(au);}
+}
+
+// ── Override showActiveCall with video ──
+function showActiveCall(c,ct){
+  const videoHtml = ct==='video'?`
+    <div style="position:relative;width:100%;height:180px;background:#000;border-radius:12px;margin-bottom:12px;overflow:hidden">
+      <video id="remoteVideo" autoplay playsinline style="width:100%;height:100%;object-fit:cover;background:#111"></video>
+      <video id="localVideo" autoplay playsinline muted style="position:absolute;bottom:8px;right:8px;width:72px;height:96px;border-radius:8px;object-fit:cover;border:2px solid rgba(255,255,255,.3)"></video>
+    </div>`:'';
+  $('callCard').innerHTML=`
+    <div class="call-badge">${ct==='video'?'Panggilan video':'Panggilan suara'}</div>
+    ${videoHtml}
+    ${ct==='video'?'':`<div class="call-cav" style="background:${c.color}">${c.photo?'<img src="'+c.photo+'">':ini(c.name||c.number)}</div>`}
+    <div class="call-cname">${esc(c.name||c.number)}</div>
+    <div class="call-ctmr" id="callTmr" style="display:block">0:00</div>
+    <div class="call-btns">
+      <button class="cbtn mute" id="cbMute"><svg viewBox="0 0 24 24" fill="var(--icon)"><path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg></button>
+      ${ct==='video'?`<button class="cbtn cam" id="cbCam" style="background:#2a3942"><svg viewBox="0 0 24 24" fill="var(--icon)"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg></button>`:''}
+      <button class="cbtn end" id="cbEnd"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" transform="rotate(135 12 12)"/></svg></button>
+      <button class="cbtn spk" id="cbSpk"><svg viewBox="0 0 24 24" fill="var(--icon)"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
+    </div>`;
+  wireCBtns(ct);
+  if(ct!=='video'){const au=document.createElement('audio');au.id='remoteAudio';au.autoplay=true;au.style.display='none';$('callCard').appendChild(au);}
+  if(ct==='video'){let camOn=true;const cb=$('cbCam');if(cb)cb.onclick=()=>{camOn=!camOn;if(localStream)localStream.getVideoTracks().forEach(t=>t.enabled=camOn);cb.style.background=camOn?'#2a3942':'var(--g)';};}
+}
+
+// ── Override endCall to also stop WebRTC ──
+const _origEndCall = endCall;
+function endCall(upd){
+  stopWebRTC();
+  _origEndCall(upd);
+}
+
+// ── Override accept call to start WebRTC ──
+// Patch showIncomingCall's accept button
+const _origShowIncomingCall = showIncomingCall;
+function showIncomingCall(d){
+  const c=contacts[d.from]||{name:d.from,color:rCol(),number:d.from,photo:null};
+  $('callCard').innerHTML=`
+    <div class="call-badge">Panggilan ${d.ct==='video'?'video':'suara'} masuk</div>
+    <div class="call-cav" style="background:${c.color};animation:cpulse 2s infinite">${c.photo?'<img src="'+c.photo+'">':ini(c.name||d.from)}</div>
+    <div class="call-cname">${esc(c.name||d.from)}</div>
+    <div class="call-cnum">${d.from}</div>
+    <div class="call-cstat">${d.callerName||d.from}</div>
+    <div class="call-btns" style="gap:40px;margin-top:24px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="cbtn end" id="cbDec"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" transform="rotate(135 12 12)"/></svg></button>
+        <span style="font-size:12px;color:var(--txt2)">Tolak</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+        <button class="cbtn accept" id="cbAcc"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></button>
+        <span style="font-size:12px;color:var(--txt2)">Terima</span>
+      </div>
+    </div>`;
+  $('callOv').classList.add('on');
+  showNotif(c.name||d.from,'Panggilan '+d.ct+' masuk',c.color,c.photo,d.from);
+  $('cbDec').onclick=()=>{
+    BC.postMessage({type:'call_dec',from:ME.number,to:d.from});
+    callLogs.push({num:d.from,dir:'missed',ct:d.ct,dur:0,time:tNow()});
+    persist();renderCallsList();endCall(false);
+  };
+  $('cbAcc').onclick=()=>{
+    BC.postMessage({type:'call_acc',from:ME.number,to:d.from,ct:d.ct});
+    callState.startTime=Date.now();
+    callLogs.push({num:d.from,dir:'in',ct:d.ct,dur:0,time:tNow()});
+    persist();startTimer();
+    showActiveCall(c,d.ct);
+    initWebRTC(d.ct,'in',d.from);
+  };
+}
+
+// ══════════════════════════════════════════════
+//  STATUS AUDIENCE PICKER (like screenshot)
+// ══════════════════════════════════════════════
+
+function openStatusUpdate(){
+  // Show status composer with audience picker
+  showStatusComposer();
+}
+
+function showStatusComposer(){
+  // Create overlay
+  const ov=document.createElement('div');
+  ov.id='statComposer';
+  ov.style.cssText='position:fixed;inset:0;z-index:500;background:var(--bg);display:flex;flex-direction:column;animation:sIn .2s ease';
+  ov.innerHTML=`
+    <div style="display:flex;align-items:center;padding:12px 16px;gap:10px;background:var(--panel);border-bottom:1px solid var(--bdr)">
+      <button onclick="document.getElementById('statComposer').remove()" style="width:36px;height:36px;border-radius:50%;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--txt)"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+      <div style="flex:1;font-size:18px;font-weight:600">Pembaruan status</div>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:20px 16px">
+      <!-- Status text input -->
+      <textarea id="statTaInput" placeholder="Apa yang ingin kamu ceritakan?" style="width:100%;min-height:120px;background:var(--panel);border:1px solid var(--bdr);border-radius:12px;padding:14px;color:var(--txt);font-size:16px;outline:none;resize:none;font-family:inherit;line-height:1.5;margin-bottom:16px"></textarea>
+      
+      <!-- Quick presets -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+        ${['Hei! Aku pakai CMS 👋','Tersedia ✅','Sibuk 🔴','Di sekolah 📚','Di gym 💪','Sedang tidur 😴','Hubungi kalau penting','Baterai mau habis 🔋'].map(p=>`<div onclick="document.getElementById('statTaInput').value='${p.replace(/'/g,"\'")}'" style="padding:7px 14px;background:var(--panel);border:1px solid var(--bdr);border-radius:20px;font-size:13px;color:var(--txt2);cursor:pointer;transition:all .15s;white-space:nowrap">${p}</div>`).join('')}
+      </div>
+
+      <!-- Audience picker -->
+      <div style="font-size:14px;font-weight:600;color:var(--txt2);margin-bottom:12px">Pilih audiens</div>
+      <div id="audiencePicker" style="display:flex;flex-direction:column;gap:4px">
+        <label style="display:flex;align-items:center;padding:14px 16px;background:var(--panel);border-radius:12px;cursor:pointer;gap:14px;margin-bottom:4px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(0,168,132,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--g)"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/><path d="M12 14c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:500">Kontak saya</div>
+          </div>
+          <input type="radio" name="audience" value="all" style="width:20px;height:20px;accent-color:var(--g)">
+        </label>
+        <label style="display:flex;align-items:center;padding:14px 16px;background:var(--panel);border-radius:12px;cursor:pointer;gap:14px;margin-bottom:4px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(0,168,132,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--g)"><path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:500">Kontak saya, kecuali...</div>
+            <div style="font-size:13px;color:var(--g);margin-top:1px" id="excCount">0 dikecualikan · <span style="color:var(--g);cursor:pointer">Edit ›</span></div>
+          </div>
+          <input type="radio" name="audience" value="except" checked style="width:20px;height:20px;accent-color:var(--g)">
+        </label>
+        <label style="display:flex;align-items:center;padding:14px 16px;background:var(--panel);border-radius:12px;cursor:pointer;gap:14px;margin-bottom:4px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(0,168,132,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--g)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:500">Bagikan hanya ke...</div>
+            <div style="font-size:13px;color:var(--g);margin-top:1px" id="incCount">${Object.keys(contacts).length} disertakan · <span style="color:var(--g);cursor:pointer">Edit ›</span></div>
+          </div>
+          <input type="radio" name="audience" value="only" style="width:20px;height:20px;accent-color:var(--g)">
+        </label>
+      </div>
+    </div>
+    <!-- Bottom bar with Kirim -->
+    <div style="padding:12px 16px;background:var(--panel);border-top:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))">
+      <div style="display:flex;gap:12px">
+        <div style="width:42px;height:42px;border-radius:50%;background:var(--inp);display:flex;align-items:center;justify-content:center;cursor:pointer" title="Putar balik">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="var(--g)"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg>
+        </div>
+      </div>
+      <button onclick="submitStatus()" style="padding:13px 32px;background:var(--g);border:none;border-radius:30px;color:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;min-width:140px;justify-content:center;transition:background .2s">
+        Kirim
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>`;
+  document.body.appendChild(ov);
+}
+
+function submitStatus(){
+  const text=document.getElementById('statTaInput')?.value.trim();
+  const ov=document.getElementById('statComposer');
+  if(ov)ov.remove();
+  if(!text)return;
+  const st=text;
+  ME.status=st;
+  const myStatDisp=document.getElementById('myStatDisp');
+  if(myStatDisp)myStatDisp.textContent=st;
+  const myStatSubTxt=document.getElementById('myStatSubTxt');
+  if(myStatSubTxt)myStatSubTxt.textContent=st;
+  statuses[ME.number]=statuses[ME.number]||[];
+  statuses[ME.number].push({text:st,ts:iso(),mine:true,seen:true});
+  regMe();persist();
+  BC.postMessage({type:'stat_upd',from:ME.number,text:st,ts:iso()});
+  renderStatusPage();
+  // Switch to status page
+  switchPage('pageStatus');
+}
+
+</script><script>
 // ════════════════════════════════════════════════════════════
 //  ZAP MESSENGER — Full WhatsApp clone
 //  BroadcastChannel for real cross-tab messaging
 //  localStorage for full persistence
 // ════════════════════════════════════════════════════════════
 
-const BC = new BroadcastChannel('zap_final_v1');
-const DBPFX = 'zapf_';
+const BC = new BroadcastChannel('cms_app_v1');
+const DBPFX = 'cmsf_';
 
 // ── UTILS ──
 const $ = id => document.getElementById(id);
@@ -844,7 +1151,7 @@ const db = {
   set(k,v){try{localStorage.setItem(DBPFX+k,JSON.stringify(v))}catch{}},
 };
 // Global user registry
-const REG = 'zapf_reg';
+const REG = 'cmsf_reg';
 const getReg = () => {try{return JSON.parse(localStorage.getItem(REG)||'{}')}catch{return{}}};
 const setReg = r => {try{localStorage.setItem(REG,JSON.stringify(r))}catch{}};
 const regLookup = n => getReg()[n]||null;
@@ -909,6 +1216,18 @@ const EMOJIS = ['😊','😂','❤️','😍','🙏','😎','🤔','👍','🎉'
     if(c.n==='Indonesia') { o.selected=true; selectedCountry=c; }
     sel.appendChild(o);
   });
+  // Also fill in ncCountry select for new contact form with all countries
+  const ncSel2 = $('ncCountry');
+  if(ncSel2 && ncSel2.children.length===0){
+    COUNTRIES.forEach((c,i)=>{
+      const o=document.createElement('option');
+      o.value=i; 
+      const flag=FLAGS[c.c]||'🌐';
+      o.textContent=flag+' '+c.n+' ('+c.c+')';
+      if(c.n==='Indonesia')o.selected=true;
+      ncSel2.appendChild(o);
+    });
+  }
   // Fill nc country
   const ncSel = $('ncCountry');
   COUNTRIES.forEach((c,i)=>{
@@ -949,7 +1268,7 @@ function updateNumDisplay(){
 }
 
 function fillStatPresets(){
-  const PRESETS=['Hei, aku pakai Zap!','Tersedia','Sibuk','Di sekolah','Di gym','Sedang tidur','Hubungi kalau penting','Baterai mau habis'];
+  const PRESETS=['Hei, aku pakai CMS!','Tersedia','Sibuk','Di sekolah','Di gym','Sedang tidur','Hubungi kalau penting','Baterai mau habis'];
   const wrap=$('statOptList');
   wrap.innerHTML='';
   PRESETS.forEach(p=>{
@@ -989,14 +1308,16 @@ function wireSetup(){
   };
   $('profName').onkeydown=e=>{if(e.key==='Enter')doProfile();};
   $('btnProfNext').onclick=doProfile;
-  $('btnStatDone').onclick=()=>finishSetup($('statCustom').value.trim()||selectedStatPreset||'Hei, aku pakai Zap!');
+  $('btnStatDone').onclick=()=>finishSetup($('statCustom').value.trim()||selectedStatPreset||'Hei, aku pakai CMS!');
   $('btnStatSkip').onclick=()=>finishSetup('');
 }
 
 function doProfile(){
   const n=$('profName').value.trim();
   if(!n){$('profName').style.borderBottomColor='var(--red)';return;}
-  ME.name=n;goToScr('s-stat');
+  ME.name=n;
+  // Skip status step - go directly to app
+  finishSetup(selectedStatPreset||'Hey there! I am using CMS.');
 }
 function finishSetup(st){
   ME.status=st||'';
@@ -1011,7 +1332,10 @@ function finishSetup(st){
   bootApp();
 }
 
-function goToScr(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');}
+function goToScr(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  $(id).classList.add('on');
+}
 
 // ── BOOT APP ──
 function bootApp(){
@@ -1216,6 +1540,9 @@ function switchPage(pid){
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.toggle('on',t.dataset.page===pid));
   if(pid==='pageStatus')renderStatusPage();
   if(pid==='pageCalls')renderCallsList();
+  // Smooth transition
+  $(pid).style.animation='sIn .18s ease both';
+  setTimeout(()=>{if($(pid))$(pid).style.animation='';},200);
 }
 
 // ── SLIDES ──
@@ -1352,7 +1679,8 @@ function saveNewContact(){
   const fn=$('ncFirstName').value.trim();
   const ln=$('ncLastName').value.trim();
   const ph=$('ncPhone').value.trim();
-  const cc=COUNTRIES[+$('ncCountry').value]?.c||'+62';
+  const ccIdx=+($('ncCountry')?.value||0);
+  const cc=COUNTRIES[ccIdx]?.c||'+62';
   if(!fn&&!ph){alert('Masukkan nama atau nomor');return;}
   const fullNum=ph?(ph.startsWith('+')?ph:cc+ph):'';
   const name=(fn+' '+ln).trim()||fullNum;
@@ -1623,9 +1951,9 @@ function setReply(m){
 
 // ── STATUS ──
 function openStatusUpdate(){
-  const text=prompt('Status kamu:',ME.status||'Hei, aku pakai Zap!');
+  const text=prompt('Status kamu:',ME.status||'Hei, aku pakai CMS!');
   if(text===null)return;
-  const st=text.trim()||'Hei, aku pakai Zap!';
+  const st=text.trim()||'Hei, aku pakai CMS!';
   ME.status=st;
   $('myStatDisp')&&($('myStatDisp').textContent=st);
   $('myStatSubTxt').textContent=st;
@@ -1701,6 +2029,8 @@ function startCall(ct){
   BC.postMessage({type:'call_inv',from:ME.number,to:activeChat,ct,callerName:ME.name||ME.number});
   callLogs.push({num:activeChat,dir:'out',ct,dur:0,time:tNow()});persist();renderCallsList();
   showOutCall(c,ct);
+  // Start WebRTC media
+  initWebRTC(ct,'out',activeChat);
 }
 function showOutCall(c,ct){
   $('callCard').innerHTML=`
